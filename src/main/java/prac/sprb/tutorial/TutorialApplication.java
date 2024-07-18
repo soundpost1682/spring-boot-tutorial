@@ -10,6 +10,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import prac.sprb.tutorial.run.Location;
 import prac.sprb.tutorial.run.Run;
+import prac.sprb.tutorial.run.RunRepository;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -23,10 +24,10 @@ public class TutorialApplication {
         SpringApplication.run(TutorialApplication.class, args);
     }
     @Bean
-    CommandLineRunner runner(){
+    CommandLineRunner runner(RunRepository runRepository){
         return args -> {
             Run run = new Run(1, "First Run", LocalDateTime.now(), LocalDateTime.now().plus(1, ChronoUnit.HOURS), 5, Location.OUTDOOR);
-            log.info("Run : "+ run);
+            runRepository.create(run);
         };
 
     }
