@@ -27,8 +27,10 @@ public class TutorialApplication {
     CommandLineRunner runner(RunRepository runRepository){
         return args -> {
             Run run = new Run(1, "First Run", LocalDateTime.now(), LocalDateTime.now().plus(1, ChronoUnit.HOURS), 5, Location.OUTDOOR);
+            System.out.println(run.location());
             runRepository.create(run);
         };
+
 
     }
 }
